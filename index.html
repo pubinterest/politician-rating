@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>정치인 별점 리뷰</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .review { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
+    .stars { color: gold; }
+  </style>
+</head>
+<body>
+  <h1>🗳️ 정치인 별점 리뷰</h1>
+  <form id="reviewForm">
+    <label>닉네임: <input type="text" id="name" required></label><br><br>
+    <label>정치인 이름: <input type="text" id="politician" required></label><br><br>
+    <label>별점: 
+      <select id="rating">
+        <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+        <option value="4">⭐️⭐️⭐️⭐️</option>
+        <option value="3">⭐️⭐️⭐️</option>
+        <option value="2">⭐️⭐️</option>
+        <option value="1">⭐️</option>
+      </select>
+    </label><br><br>
+    <label>한 줄 리뷰: <input type="text" id="comment" required></label><br><br>
+    <button type="submit">리뷰 등록</button>
+  </form>
+
+  <h2>📄 리뷰 목록</h2>
+  <div id="reviews"></div>
+
+  <script>
+    const form = document.getElementById('reviewForm');
+    const reviewsDiv = document.getElementById('reviews');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const politician = document.getElementById('politician').value;
+      const rating = document.getElementById('rating').value;
+      const comment = document.getElementById('comment').value;
+
+      const stars = '⭐️'.repeat(rating);
+
+      const reviewHTML = `
+        <div class="review">
+          <strong>${politician}</strong> (${stars})<br>
+          <em>${comment}</em><br>
+          <small>- ${name}</small>
+        </div>
+      `;
+      reviewsDiv.innerHTML = reviewHTML + reviewsDiv.innerHTML;
+      form.reset();
+    });
+  </script>
+</body>
+</html>
